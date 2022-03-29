@@ -67,13 +67,13 @@ const Header = props => {
   return <ArwesHeader animate>
     <Centered className={classes.root} {...rest}>
       <img src="/favicon.png" alt="" className={classes.img} style={{
-        margin: "15px 10px 15px 0",
-        height: "50px",
+        margin: "15px 20px 15px 0",
+        height: "60px",
         width: "auto",
       }} />
       <Logo animate size={50} className={classes.logo} layer="header" />
       <Words animate className={classes.banner}>
-        NASA Mission Control
+        ISRO Mission Control
       </Words>
       <nav className={`${classes.nav}`}>
         <Clickable className={classes.clickable} onClick={onNav}>
