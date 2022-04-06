@@ -13,7 +13,7 @@ describe("Launches api", () => {
 
   describe("Test GET/launches", () => {
     test("it should pass 200", async () => {
-      const response = await request(app).get("/launches");
+      const response = await request(app).get("/v1/launches");
       expect(response.statusCode).toBe(200);
     });
   });
@@ -33,7 +33,7 @@ describe("Launches api", () => {
 
     test("it should return 201", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(completeLaunchData)
         .expect("Content-Type", /json/)
         .expect(201);
@@ -45,7 +45,7 @@ describe("Launches api", () => {
 
     test("it should respone to 400", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(launchDataWithoutDate)
         .expect("Content-Type", /json/)
         .expect(400);
