@@ -5,10 +5,13 @@ const {
   abortLaunchById,
 } = require("../../models/launches.model");
 
+const {getPagination} = require('../../services/query');
+
 async function httpGetAllLaunch(req, res) {
   //return res.status(201).json({message:"controller tk aa gaya"});
-  
-  return res.status(200).json(await getAllLaunch());
+  const {skip,limit} = getPagination(req.query);
+  const launches = await getAllLaunch(skip, limit)
+  return res.status(200).json(launches);
 }
 
 async function httpAddNewLaunch(req, res) {
