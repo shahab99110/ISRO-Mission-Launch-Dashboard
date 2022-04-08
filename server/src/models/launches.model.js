@@ -138,8 +138,8 @@ async function saveLaunch(launch) {
 
 module.exports = {
   loadLaunchesData,
+  existsLaunchWithId,
   getAllLaunch,
   addNewLaunch,
   abortLaunchById,
-  existsLaunchWithId,
 };
