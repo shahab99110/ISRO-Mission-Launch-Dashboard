@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
-    "start": "nodemon src/server.js"
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "02---nasa-launch-pad": "file:..",
+    "axios": "^0.26.1",
     "cors": "^2.8.5",
     "csv-parse": "^5.0.4",
     "dotenv": "^16.0.0",
