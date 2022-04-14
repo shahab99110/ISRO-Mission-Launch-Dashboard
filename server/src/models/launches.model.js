@@ -53,16 +53,16 @@ async function populateLaunch() {
 }
 
 async function loadLaunchesData() {
-  const firstLaunch = await findLaunch({
-    flightNumber: 1,
-    rocket: "Falcon 1",
-    mission: "FalconSat",
-  });
+   const firstLaunch = await findLaunch({
+     flightNumber: 1,
+     rocket: "Falcon 1",
+     mission: "FalconSat",
+   });
 
-  if (firstLaunch) {
-    console.log("spacex launch data already loaded");
-    return;
-  } else {
+   if (firstLaunch) {
+     console.log("spacex launch data already loaded");
+     return;
+   } else {
     await populateLaunch();
   }
 }
@@ -79,10 +79,10 @@ async function findLaunch(filter) {
 
 async function getAllLaunch(skip, limit) {
   return await launchDatabase
-    .find({'launchDate':{$gte: new Date()}}, { _id: 0, __v: 0 })
-    .sort({ flightNumber: 1 })
-    .skip(skip)
-    .limit(limit);
+    .find({}, { _id: 0, __v: 0 })
+     .sort({ flightNumber: 1 })
+     .skip(skip)
+     .limit(limit);
 }
 
 async function addNewLaunch(launch) {
