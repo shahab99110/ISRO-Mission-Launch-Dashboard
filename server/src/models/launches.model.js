@@ -79,7 +79,7 @@ async function findLaunch(filter) {
 
 async function getAllLaunch(skip, limit) {
   return await launchDatabase
-    .find({}, { _id: 0, __v: 0 })
+    .find({'launchDate':{$gte: new Date()}}, { _id: 0, __v: 0 })
     .sort({ flightNumber: 1 })
     .skip(skip)
     .limit(limit);
