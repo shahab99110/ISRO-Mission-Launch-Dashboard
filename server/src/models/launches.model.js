@@ -4,49 +4,35 @@ const planets = require("./planets.mongo");
 
 let DEFAULT_FLIGHT_NUMBER = 100;
 
-const SPACEX_API_URL = "https://api.spacexdata.com/v4/launches/query";
+const ISRO_API_URL = "https://isrospacex.com/launches.json";
 
 async function populateLaunch() {
-  console.log("downloading data from spacex api");
-  const response = await axios.post(SPACEX_API_URL, {
-    query: {},
-    options: {
-      pagination: false,
-      populate: [
-        {
-          path: "rocket",
-          select: {
-            name: 1,
-          },
-        },
-        {
-          path: "payloads",
-          select: {
-            customers: 1,
-          },
-        },
-      ],
-    },
-  });
+  console.log("downloading data from isro api");
+  const response = await axios.get(ISRO_API_URL);
+
 
   if (response.status !== 200) {
-    console.log("spacex api launch data failed");
-    throw new Error("failder to download spacex data");
+    console.log("isro api launch data failed");
+    throw new Error("failed to download isro data");
   }
-  const launchDocs = response.data.docs;
+  const launchDocs = response.data.launcheList;
   for (const launchDoc of launchDocs) {
-    const payloads = launchDoc["payloads"];
-    const customers = payloads.flatMap((payload) => {
-      return payload["customers"];
-    });
+    if(launchDoc.launchDate > new Date()){
+      launchDoc.upcoming = true;
+    }else{
+      launchDoc.upcoming = false;
+    }
+    launchDoc.flightNumber = DEFAULT_FLIGHT_NUMBER;
+    DEFAULT_FLIGHT_NUMBER++;
+    launchDoc.success = true;
     const launch = {
-      flightNumber: launchDoc["flight_number"],
+      flightNumber: launchDoc["flightNumber"],
       mission: launchDoc["name"],
-      rocket: launchDoc["rocket"]["name"],
-      launchDate: launchDoc["date_local"],
+      rocket: launchDoc["launchType"],
+      launchDate: launchDoc["launchDate"],
       upcoming: launchDoc["upcoming"],
       success: launchDoc["success"],
-      customers,
+    
     };
     await saveLaunch(launch);
   }
@@ -54,13 +40,13 @@ async function populateLaunch() {
 
 async function loadLaunchesData() {
    const firstLaunch = await findLaunch({
-     flightNumber: 1,
-     rocket: "Falcon 1",
-     mission: "FalconSat",
+     flightNumber: 100,
+     rocket: "GSLV-MK-III",
+     mission: "GSLV-Mk III - M1 / Chandrayaan-2 Mission",
    });
 
    if (firstLaunch) {
-     console.log("spacex launch data already loaded");
+     console.log("isro launch data already loaded");
      return;
    } else {
     await populateLaunch();
