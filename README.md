@@ -1,6 +1,8 @@
 
 # ISRO MISSION CONTROL
 
+## Project link: http://52.53.197.219:8000/
+
 
 ## Quick Start
 
@@ -58,6 +60,11 @@ naviagate to http://localhost:8000
 
 - Schedule Upcoming Launches to one the habitable planets Found by kepler
 - View Isro previous missions
+
+## Screenshot
+![Launch mission](https://github.com/shahab99110/ISRO-Mission-Launch-Dashboard/blob/master/screenshot/Launch%20mission.png)
+![View upcoming mission](https://github.com/shahab99110/ISRO-Mission-Launch-Dashboard/blob/master/screenshot/View%20upcoming%20mission.png)
+![Isro Mission History](https://github.com/shahab99110/ISRO-Mission-Launch-Dashboard/blob/master/screenshot/Isro%20Mission%20History.png)
 
 
 
