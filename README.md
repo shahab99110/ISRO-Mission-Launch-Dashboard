@@ -1,7 +1,6 @@
 
 # ISRO MISSION CONTROL
 
-## Project link: http://52.53.197.219:8000/
 
 
 ## Quick Start
